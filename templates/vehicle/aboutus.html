@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style media="screen">
+    .jumbotron {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .jumbotron h1 {
+      text-align: center;
+    }
+
+    .alert {
+      margin: 0px;
+    }
+    :root {
+      --primary-color: #fca311;
+      --card-bg: #ffffff;
+      --text-dark: #222;
+      --text-light: #555;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--primary-color);
+      color: var(--text-dark);
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: #000;
+    }
+
+    .grid-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background-color: cornflowerblue;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 300px;
+      padding: 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      background-color: aquamarine;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: var(--primary-color);
+    }
+
+    .service-title {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .service-description {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .service-card {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <title></title>
+</head>
+
+<body>
+
+  {% include "vehicle/navbar.html" %}
+  <br><br>
+  <center>
+    <h3 class='alert alert-success' style="margin-bottom:0px;">About Us !</h3>
+  </center>
+  <div class="jumbotron" style="margin-bottom: 0px;margin-top: 0px;">
+     <h1>What We Do Offer</h1>
+  
+    <div class="grid-container">
+      <div class="service-card">
+        <div class="icon">🔑</div>
+        <div class="service-title">Spare Keys Assistance</div>
+        <div class="service-description">
+          Lost your keys? We will arrange pickup and delivery of spare keys to your breakdown location.
+        </div>
+      </div>
+  
+      <div class="service-card">
+        <div class="icon">🔧</div>
+        <div class="service-title">Minor Repairs</div>
+        <div class="service-description">
+          On-spot minor repairs to get your vehicle back in working condition quickly and safely.
+        </div>
+      </div>
+  
+      <div class="service-card">
+        <div class="icon">⛽</div>
+        <div class="service-title">Emergency Fuel</div>
+        <div class="service-description">
+          Ran out of fuel? We’ll deliver it to your location so you can get back on the road quickly.
+        </div>
+      </div>
+  
+      <div class="service-card">
+        <div class="icon">🛞</div>
+        <div class="service-title">Flat Tyre</div>
+        <div class="service-description">
+          If you suffer a flat tyre, we’ll arrange for on-site tyre change or replacement support.
+        </div>
+      </div>
+  
+      <div class="service-card">
+        <div class="icon">🔋</div>
+        <div class="service-title">Flat Battery</div>
+        <div class="service-description">
+          For battery-related breakdowns, we’ll help repair or replace your car battery on-site.
+        </div>
+      </div>
+  
+      <div class="service-card">
+        <div class="icon">☎</div>
+        <div class="service-title">Phone Support</div>
+        <div class="service-description">
+          Get help over the phone to fix minor issues yourself, with guidance from a professional mechanic.
+        </div>
+      </div>
+      
+    </div>
+    <p class="lead">
+      <br><a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+    </p>
+  </div>
+
+  
+  <marquee behavior="scroll" direction="left">
+   <img src="{% static "images/ferrari.png" %}" width="120" height="80" alt="ferrari" />
+    <img src="{% static "images/ford.png" %}" width="120" height="80" alt="ford" />
+   <img src="{% static "images/lambo.png" %}" width="120" height="80" alt="lambo" />
+   <img src="{% static "images/mahindra.png" %}" width="120" height="80" alt="mahindra" />
+   <img src="{% static "images/tvs.png" %}" width="120" height="80" alt="tvs" />
+   <img src="{% static "images/tata.png" %}" width="120" height="80" alt="tata" />
+   <img src="{% static "images/hero.png" %}" width="120" height="80" alt="hero" />
+   <img src="{% static "images/rolls.png" %}" width="120" height="80" alt="rolls" />
+   <img src="{% static "images/suzuki.png" %}" width="120" height="80" alt="suzuki" />
+ </marquee>
+  {% include "vehicle/footer.html" %}
+</body>
+
+</html>
