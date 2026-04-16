@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer Signup</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <style media="screen">
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(to right, #b92b27, #1565c0)
+      }
+
+      .box {
+        width: 500px;
+        padding: 40px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #191919;
+        text-align: center;
+        transition: 0.25s;
+        margin-top: 100px
+      }
+
+      .box input[type="text"],
+      .box input[type="password"],
+      .box input[type="file"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 10px 10px;
+        width: 250px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s
+      }
+
+      .box h1 {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500
+      }
+
+      .box input[type="text"]:focus,
+      .box input[type="password"]:focus,
+      .box input[type="file"]:focus {
+        width: 300px;
+        border-color: #2ecc71
+      }
+
+      .box input[type="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer
+      }
+
+      .box input[type="submit"]:hover {
+        background: #2ecc71
+      }
+
+      .error {
+        color: #ff0000;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+
+      ul.social-network {
+        list-style: none;
+        display: inline;
+        margin-left: 0 !important;
+        padding: 0
+      }
+
+      ul.social-network li {
+        display: inline;
+        margin: 0 5px
+      }
+
+      .social-network a.icoFacebook:hover {
+        background-color: #3B5998
+      }
+
+      .social-network a.icoTwitter:hover {
+        background-color: #33ccff
+      }
+
+      .social-network a.icoGoogle:hover {
+        background-color: #BD3518
+      }
+
+      .social-network a.icoFacebook:hover i,
+      .social-network a.icoTwitter:hover i,
+      .social-network a.icoGoogle:hover i {
+        color: #fff
+      }
+
+      a.socialIcon:hover,
+      .socialHoverClass {
+        color: #44BCDD
+      }
+
+      .social-circle li a {
+        display: inline-block;
+        position: relative;
+        margin: 0 auto 0 auto;
+        border-radius: 50%;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        font-size: 20px
+      }
+
+      .social-circle li i {
+        margin: 0;
+        line-height: 50px;
+        text-align: center
+      }
+
+      .social-circle li a:hover i,
+      .triggeredHover {
+        transform: rotate(360deg);
+        transition: all 0.2s
+      }
+
+      .social-circle i {
+        color: #fff;
+        transition: all 0.8s;
+        transition: all 0.8s
+      }
+    </style>
+  </head>
+  <body>
+    {% include "vehicle/navbar.html" %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <form class="box" method="post" enctype="multipart/form-data" id="customerSignupForm">
+              {% csrf_token %}
+              <h1>CUSTOMER SIGNUP</h1>
+              <p class="text-muted">Please enter your details to create account!</p>
+              
+              {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+              <div class="error" id="first_name_error"></div>
+              
+              {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+              <div class="error" id="last_name_error"></div>
+              
+              {% render_field userForm.username class="form-control" placeholder="Username" %}
+              <div class="error" id="username_error"></div>
+              
+              {% render_field userForm.password class="form-control" placeholder="Password" %}
+              <div class="error" id="password_error"></div>
+              
+              {% render_field customerForm.address class="form-control" placeholder="Address" %}
+              <div class="error" id="address_error"></div>
+              
+              {% render_field customerForm.mobile class="form-control" placeholder="Mobile" %}
+              <div class="error" id="mobile_error"></div>
+              
+              {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
+              <div class="error" id="profile_pic_error"></div>
+
+              <input type="submit" name="" value="Create">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $('#customerSignupForm').on('submit', function(e) {
+          e.preventDefault();
+          
+          // Reset previous errors
+          $('.error').text('');
+          
+          // Get form values
+          var first_name = $('input[name="first_name"]').val();
+          var last_name = $('input[name="last_name"]').val();
+          var username = $('input[name="username"]').val();
+          var password = $('input[name="password"]').val();
+          var address = $('input[name="address"]').val();
+          var mobile = $('input[name="mobile"]').val();
+          var profile_pic = $('input[name="profile_pic"]').val();
+          
+          // Validate form
+          var isValid = true;
+          
+          if (!first_name) {
+            $('#first_name_error').text('First name is required');
+            isValid = false;
+          }
+          
+          if (!last_name) {
+            $('#last_name_error').text('Last name is required');
+            isValid = false;
+          }
+          
+          if (!username) {
+            $('#username_error').text('Username is required');
+            isValid = false;
+          }
+          
+          if (!password) {
+            $('#password_error').text('Password is required');
+            isValid = false;
+          } else if (password.length < 6) {
+            $('#password_error').text('Password must be at least 6 characters');
+            isValid = false;
+          }
+          
+          if (!address) {
+            $('#address_error').text('Address is required');
+            isValid = false;
+          }
+          
+          if (!mobile) {
+            $('#mobile_error').text('Mobile number is required');
+            isValid = false;
+          } else if (!/^\d{10}$/.test(mobile)) {
+            $('#mobile_error').text('Please enter a valid 10-digit mobile number');
+            isValid = false;
+          }
+          
+          if (!profile_pic) {
+            $('#profile_pic_error').text('Profile picture is required');
+            isValid = false;
+          }
+          
+          if (isValid) {
+            // Submit form if valid
+            this.submit();
+          } else {
+            // Show error popup
+            swal({
+              title: "Error!",
+              text: "Please fill all required fields correctly",
+              icon: "error",
+              button: "OK",
+            });
+          }
+        });
+      });
+    </script>
+
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br>
+    {% include "vehicle/footer.html" %}
+  </body>
+</html>
